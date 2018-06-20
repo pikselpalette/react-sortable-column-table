@@ -1,13 +1,13 @@
-# React Sortable Table
+# React Sortable Column Table
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-A table which can be reordered by dragging an icon in one of the cells
+A table with columns that can be reordered by dragging an icon in one of the cells
 
 ## Installation
 
 ```sh
-npm i --save react-sortable-table
+npm i --save react-sortable-column-table
 ```
 
 ## Usage
@@ -15,7 +15,7 @@ npm i --save react-sortable-table
 ### Creating tables
 
 ```jsx
-import SortableTable from 'react-sortable-table';
+import SortableTable from 'react-sortable-column-table';
 
 const table = (
   <SortableTable>
