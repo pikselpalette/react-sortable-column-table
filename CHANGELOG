@@ -1,0 +1,11 @@
+# Changelog
+
+## Unreleased
+
+## 0.1.1
+
+* Make renderAs as prop work with other renderAs components
+
+## 0.1.0
+
+* Package created
