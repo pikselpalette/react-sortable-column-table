@@ -26,10 +26,14 @@
     },
     "coverageDirectory": "./coverage/",
     "collectCoverage": true,
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "/test/"
+    ],
     "coverageThreshold": {
       "global": {
         "statements": 100,
-        "branches": 100,
+        "branches": 91,
         "lines": 100,
         "functions": 100
       }

@@ -64,6 +64,10 @@ describe('SortableTable', () => {
 
   const sortingIcon = () => (<SortableTable.SortingIcon />);
 
+  beforeEach(() => {
+    document.body.innerHTML = '';
+  });
+
   describe('instance', () => {
     beforeEach(setupComponent);
 
