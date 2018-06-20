@@ -22,8 +22,8 @@ const table = (
     <SortableTable.Table>
       <SortableTable.Header>
         <SortableTable.Row>
-          <SortableTable.HeaderCell>Foo <SortingIcon /></SortableTable.HeaderCell>
-          <SortableTable.HeaderCell>Bar <SortingIcon /></SortableTable.HeaderCell>
+          <SortableTable.HeaderCell>Foo <SortableTable.SortingIcon /></SortableTable.HeaderCell>
+          <SortableTable.HeaderCell>Bar <SortableTable.SortingIcon /></SortableTable.HeaderCell>
         </SortableTable.Row>
       </SortableTable.Header>
       <SortableTable.Body>
