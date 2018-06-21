@@ -26,9 +26,10 @@
     },
     "coverageDirectory": "./coverage/",
     "collectCoverage": true,
-    "coveragePathIgnorePatterns": [
-      "/node_modules/",
-      "/test/"
+    "collectCoverageFrom": [
+      "lib/**.*.js",
+      "!**/node_modules/**",
+      "!**/test/**"
     ],
     "coverageThreshold": {
       "global": {
