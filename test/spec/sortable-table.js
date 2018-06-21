@@ -70,6 +70,45 @@ describe('SortableTable', () => {
   describe('instance', () => {
     beforeEach(setupComponent);
 
+    describe('when a different event hovers over a column', () => {
+      let dragOverEvent;
+      let columnCell;
+
+      beforeEach(() => {
+        dragOverEvent = {
+          preventDefault: jest.fn()
+        };
+
+        jest.spyOn(instance, 'setState');
+
+        columnCell = header().find('tr')
+          .at(0)
+          .find('th')
+          .at(1);
+
+        columnCell.simulate('dragover', dragOverEvent);
+      });
+
+      it('does not call preventDefault', () => {
+        expect(dragOverEvent.preventDefault).not.toHaveBeenCalled();
+      });
+
+      it('does not set the currentIndex', () => {
+        expect(instance.currentIndex).toBeUndefined();
+      });
+
+      describe('when dropping on that column', () => {
+        beforeEach(() => {
+          jest.spyOn(instance, 'tearDownDraggingElements');
+          columnCell.simulate('drop');
+        });
+
+        it('does not call tearDownDraggingElements', () => {
+          expect(instance.tearDownDraggingElements).not.toHaveBeenCalled();
+        });
+      });
+    });
+
     describe('sortableColumns', () => {
       it('populates the sortableColumns array with columns with sorting icons', () => {
         expect(instance.sortableColumns).toEqual([0, 1, 2]);
