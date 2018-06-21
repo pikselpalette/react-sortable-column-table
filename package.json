@@ -87,7 +87,6 @@
   },
   "dependencies": {
     "lodash-move": "^1.1.1",
-    "react-progressive-table": "^0.1.2",
-    "react-render-as": "^0.1.1"
+    "react-progressive-table": "^0.1.2"
   }
 }
