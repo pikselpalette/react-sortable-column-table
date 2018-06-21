@@ -9,6 +9,7 @@ Enzyme.configure({ adapter: new Adapter() });
 
 describe('SortableTable', () => {
   const TestComponent = ({ children }) => (<b>{children}</b>);
+  const sortingIcon = () => (<SortableTable.SortingIcon />);
 
   let component;
   let instance;
@@ -61,8 +62,6 @@ describe('SortableTable', () => {
   const table = () => component.find('table');
   const header = () => table().find('thead');
   const body = () => table().find('tbody');
-
-  const sortingIcon = () => (<SortableTable.SortingIcon />);
 
   beforeEach(() => {
     document.body.innerHTML = '';
@@ -121,7 +120,7 @@ describe('SortableTable', () => {
             const icon = header()
               .find('th')
               .at(0)
-              .find(SortableTable.SortingIcon)
+              .find(SortableTable.SortingIcon);
 
             icon.simulate('dragstart', getDragEvent());
 
