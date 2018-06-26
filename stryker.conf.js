@@ -19,6 +19,7 @@ module.exports = (config) => {
     htmlReporter: {
       baseDir: 'test/results/mutation/html'
     },
+    maxConcurrentTestRunners: 6,
     thresholds: {
       high: 100,
       low: 96,
