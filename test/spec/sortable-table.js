@@ -263,6 +263,12 @@ describe('SortableTable', () => {
               expect(nodes).toContain(instance.ghostContainer);
             });
 
+            it('sets the ghostContainer style', () => {
+              expect(instance.ghostContainer.style.position).toEqual('absolute');
+              expect(instance.ghostContainer.style.left).toEqual('-100000px');
+              expect(instance.ghostContainer.style.width).toEqual('54px');
+            });
+
             describe('when dropping column back down in same position', () => {
               beforeEach(() => {
                 dragColumnCell.simulate('drop');
