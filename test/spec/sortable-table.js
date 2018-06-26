@@ -27,15 +27,15 @@ describe('SortableTable', () => {
       </SortableTable.Header>
       <SortableTable.Body>
         <SortableTable.Row>
-          <SortableTable.Cell>foo</SortableTable.Cell>
+          <SortableTable.Cell style={{ fontWeight: 'bold' }}>foo</SortableTable.Cell>
           <SortableTable.Cell>bar</SortableTable.Cell>
           <SortableTable.Cell><TestComponent>Bam</TestComponent></SortableTable.Cell>
           <SortableTable.Cell>Action</SortableTable.Cell>
         </SortableTable.Row>
         <SortableTable.Row>
-          <SortableTable.Cell>whizz</SortableTable.Cell>
-          <SortableTable.Cell>woop</SortableTable.Cell>
-          <SortableTable.Cell>binary star system</SortableTable.Cell>
+          <SortableTable.Cell>whizz {sortingIcon()}</SortableTable.Cell>
+          <SortableTable.Cell>woop {sortingIcon()}</SortableTable.Cell>
+          <SortableTable.Cell>binary star system {sortingIcon()}</SortableTable.Cell>
           <SortableTable.Cell>Action</SortableTable.Cell>
         </SortableTable.Row>
       </SortableTable.Body>
@@ -65,6 +65,33 @@ describe('SortableTable', () => {
 
   beforeEach(() => {
     document.body.innerHTML = '';
+  });
+
+  describe('SortingIcon', () => {
+    it('renders a span with <> as default', () => {
+      expect(mount((
+        <SortableTable.SortingIcon />
+      )).find('span')).toHaveText('<>');
+    });
+
+    it('renders children if passed children', () => {
+      expect(mount((
+        <SortableTable.SortingIcon>
+          <b>Icon</b>
+        </SortableTable.SortingIcon>
+      )).find('b')).toHaveText('Icon');
+    });
+
+    it('errors if passing 2 children', () => {
+      expect(() => {
+        mount((
+          <SortableTable.SortingIcon>
+            <b>Icon</b>
+            <i>Icon</i>
+          </SortableTable.SortingIcon>
+        ));
+      }).toThrow();
+    });
   });
 
   describe('instance', () => {
@@ -185,6 +212,15 @@ describe('SortableTable', () => {
               dragColumnCell.simulate('dragstart', dragEvent);
             });
 
+            it('combines styles with supplied props styles', () => {
+              const cell = body().find('td').at(0);
+
+              expect(cell).toHaveProp('style', {
+                opacity: 1,
+                fontWeight: 'bold'
+              });
+            });
+
             it('sets the oldIndex to the column being dragged', () => {
               expect(instance.oldIndex).toEqual(2);
             });
@@ -219,7 +255,7 @@ describe('SortableTable', () => {
               }
 
               expect(rows[0].textContent).toEqual('Bam');
-              expect(rows[1].textContent).toEqual('binary star system');
+              expect(rows[1].textContent).toContain('binary star system');
             });
 
             it('appends the ghost image to the body in a wrapper node', () => {
@@ -335,9 +371,9 @@ describe('SortableTable', () => {
                   expect(rows.at(0).find('td').at(1)).toHaveText('Bam');
                   expect(rows.at(0).find('td').at(2)).toHaveText('bar');
 
-                  expect(rows.at(1).find('td').at(0)).toHaveText('whizz');
-                  expect(rows.at(1).find('td').at(1)).toHaveText('binary star system');
-                  expect(rows.at(1).find('td').at(2)).toHaveText('woop');
+                  expect(rows.at(1).find('td').at(0)).toIncludeText('whizz');
+                  expect(rows.at(1).find('td').at(1)).toIncludeText('binary star system');
+                  expect(rows.at(1).find('td').at(2)).toIncludeText('woop');
                 });
               });
 
@@ -348,6 +384,10 @@ describe('SortableTable', () => {
 
                 it('calls the onColumnOrder callback', () => {
                   expect(mockProps.onColumnOrder).toHaveBeenCalledWith(2, 1);
+                });
+
+                it('sets isDragging to false', () => {
+                  expect(instance.isDragging).toBe(false);
                 });
               });
 
@@ -544,6 +584,13 @@ describe('SortableTable', () => {
             expect(icon).toHaveLength(1);
           }
         }
+      });
+
+      it('renders SortingIcon with the correct props', () => {
+        const icon = component.find(SortableTable.SortingIcon).first();
+
+        expect(icon).toHaveProp('draggable', true);
+        expect(icon).toHaveProp('style', { cursor: 'grab' });
       });
     });
   });
