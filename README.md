@@ -4,6 +4,9 @@
 [![npm version](https://badge.fury.io/js/react-sortable-column-table.svg)](https://badge.fury.io/js/react-sortable-column-table)
 [![Build Status](https://travis-ci.org/pikselpalette/react-sortable-column-table.svg?branch=master)](https://travis-ci.org/pikselpalette/react-sortable-column-table)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/0d0369063ad0495f8f4a1bb44ee74921)](https://www.codacy.com/app/samboylett/react-sortable-column-table?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=pikselpalette/react-sortable-column-table&amp;utm_campaign=Badge_Grade)
+[![dependencies Status](https://david-dm.org/pikselpalette/react-sortable-column-table/status.svg)](https://david-dm.org/pikselpalette/react-sortable-column-table)
+[![devDependencies Status](https://david-dm.org/pikselpalette/react-sortable-column-table/dev-status.svg)](https://david-dm.org/pikselpalette/react-sortable-column-table?type=dev)
+[![peerDependencies Status](https://david-dm.org/pikselpalette/react-sortable-column-table/peer-status.svg)](https://david-dm.org/pikselpalette/react-sortable-column-table?type=peer)
 
 A table with columns that can be reordered by dragging an icon in one of the cells
 
