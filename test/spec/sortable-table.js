@@ -9,6 +9,7 @@ Enzyme.configure({ adapter: new Adapter() });
 
 describe('SortableTable', () => {
   const TestComponent = ({ children }) => (<b>{children}</b>);
+  const PassThroughComponent = ({ children }) => children;
   const sortingIcon = () => (<SortableTable.SortingIcon />);
 
   let component;
@@ -20,7 +21,9 @@ describe('SortableTable', () => {
       <SortableTable.Header>
         <SortableTable.Row>
           <SortableTable.HeaderCell>Dave {sortingIcon()}</SortableTable.HeaderCell>
-          <SortableTable.HeaderCell>Jamie {sortingIcon()}</SortableTable.HeaderCell>
+          <PassThroughComponent>
+            <SortableTable.HeaderCell>Jamie {sortingIcon()}</SortableTable.HeaderCell>
+          </PassThroughComponent>
           <SortableTable.HeaderCell>Joe {sortingIcon()}</SortableTable.HeaderCell>
           <SortableTable.HeaderCell>No sorting</SortableTable.HeaderCell>
         </SortableTable.Row>
@@ -180,6 +183,19 @@ describe('SortableTable', () => {
             dataTransfer: {
               setDragImage: jest.fn()
             }
+          });
+
+          describe('when in a child', () => {
+            it('is draggable', () => {
+              const icon = header()
+                .find('th')
+                .at(1)
+                .find(SortableTable.SortingIcon);
+
+              icon.simulate('dragstart', getDragEvent());
+
+              expect(instance.oldIndex).toBeDefined();
+            });
           });
 
           it('is draggable', () => {
