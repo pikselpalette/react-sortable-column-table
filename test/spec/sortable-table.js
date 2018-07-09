@@ -3,14 +3,14 @@ import React from 'react';
 import Enzyme, { mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import 'jest-enzyme';
-import SortableTable from '../../lib/sortable-table';
+import SortableTable, { SortingIcon } from '../../lib/sortable-table';
 
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('SortableTable', () => {
   const TestComponent = ({ children }) => (<b>{children}</b>);
   const PassThroughComponent = ({ children }) => children;
-  const sortingIcon = () => (<SortableTable.SortingIcon />);
+  const sortingIcon = () => (<SortingIcon />);
 
   let component;
   let instance;
@@ -163,7 +163,7 @@ describe('SortableTable', () => {
               const icon = header()
                 .find('th')
                 .at(1)
-                .find(SortableTable.SortingIcon);
+                .find(SortingIcon);
 
               icon.simulate('dragstart', getDragEvent());
 
@@ -175,7 +175,7 @@ describe('SortableTable', () => {
             const icon = header()
               .find('th')
               .at(0)
-              .find(SortableTable.SortingIcon);
+              .find(SortingIcon);
 
             icon.simulate('dragstart', getDragEvent());
 
@@ -197,7 +197,7 @@ describe('SortableTable', () => {
 
               jest.useFakeTimers();
               dragEvent = getDragEvent();
-              dragColumnCell = header().find('th').find(SortableTable.SortingIcon).at(2);
+              dragColumnCell = header().find('th').find(SortingIcon).at(2);
               dragColumnCell.simulate('dragstart', dragEvent);
             });
 
@@ -388,7 +388,7 @@ describe('SortableTable', () => {
 
               describe('when dropping on an element within', () => {
                 beforeEach(() => {
-                  columnCell.find(SortableTable.SortingIcon).simulate('drop');
+                  columnCell.find(SortingIcon).simulate('drop');
                 });
 
                 it('calls the onColumnOrder callback', () => {
@@ -571,7 +571,7 @@ describe('SortableTable', () => {
         expect(headers).toHaveLength(4);
 
         for (let i = 0; i < headers.length; i++) {
-          const icon = headers.at(i).find(SortableTable.SortingIcon);
+          const icon = headers.at(i).find(SortingIcon);
 
           if (i === 3) {
             expect(icon).toHaveLength(0);
@@ -582,7 +582,7 @@ describe('SortableTable', () => {
       });
 
       it('renders SortingIcon with the correct props', () => {
-        const icon = component.find(SortableTable.SortingIcon).first();
+        const icon = component.find(SortingIcon).first();
 
         expect(icon).toHaveProp('draggable', true);
         expect(icon).toHaveProp('style', { cursor: 'grab' });
