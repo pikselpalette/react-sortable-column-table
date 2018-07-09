@@ -21,24 +21,24 @@ npm i --save react-sortable-column-table
 ### Creating tables
 
 ```jsx
-import SortableTable from 'react-sortable-column-table';
+import SortableTable, { SortingIcon } from 'react-sortable-column-table';
 
 const table = (
   <SortableTable>
-    <SortableTable.Table>
-      <SortableTable.Header>
-        <SortableTable.Row>
-          <SortableTable.HeaderCell>Foo <SortableTable.SortingIcon /></SortableTable.HeaderCell>
-          <SortableTable.HeaderCell>Bar <SortableTable.SortingIcon /></SortableTable.HeaderCell>
-        </SortableTable.Row>
-      </SortableTable.Header>
-      <SortableTable.Body>
-        <SortableTable.Row>
-          <SortableTable.Cell>foo</SortableTable.Cell>
-          <SortableTable.Cell>bar</SortableTable.Cell>
-        </SortableTable.Row>
-      </SortableTable.Body>
-    </SortableTable.Table>
+    <table>
+      <thead>
+        <tr>
+          <th>Foo <SortingIcon /></th>
+          <th>Bar <SortingIcon /></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>foo</td>
+          <td>bar</td>
+        </tr>
+      </tbody>
+    </table>
   </SortableTable>
 );
 ```
@@ -46,31 +46,35 @@ const table = (
 ### Creating tables using semantic-ui
 
 ```jsx
-import SortableTable from 'react-sortable-table';
+import SortableTable, { SortingIcon } from 'react-sortable-column-table';
 import { Table } from 'semantic-ui-react';
 
 const semanticSortingIcon = (
-  <SortableTable.SortingIcon>
+  <SortingIcon>
     <Icon name="sort" rotated="clockwise" />
-  </SortableTable.SortingIcon>
+  </SortingIcon>
 );
 
 const table = (
-  <SortableTable>
-    <SortableTable.Table as={Table}>
-      <SortableTable.Header as={Table.Header}>
-        <SortableTable.Row as={Table.Row}>
-          <SortableTable.HeaderCell as={Table.HeaderCell}>Foo {semanticSortingIcon}</SortableTable.HeaderCell>
-          <SortableTable.HeaderCell as={Table.HeaderCell}>Bar {semanticSortingIcon}</SortableTable.HeaderCell>
-        </SortableTable.Row>
-      </SortableTable.Header>
-      <SortableTable.Body as={Table.Body}>
-        <SortableTable.Row as={Table.Row} key="1">
-          <SortableTable.Cell as={Table.Cell}>foo</SortableTable.Cell>
-          <SortableTable.Cell as={Table.Cell}>bar</SortableTable.Cell>
-        </SortableTable.Row>
-      </SortableTable.Body>
-    </SortableTable.Table>
+  <SortableTable
+    tr={Table.Row}
+    th={Table.HeaderCell}
+    td={Table.Cell}
+  >
+    <Table>
+      <Table.Header>
+        <Table.Row>
+          <Table.HeaderCell>Foo {semanticSortingIcon}</Table.HeaderCell>
+          <Table.HeaderCell>Bar {semanticSortingIcon}</Table.HeaderCell>
+        </Table.Row>
+      </thead>
+      <Table.Body>
+        <Table.Row>
+          <Table.Cell>foo</Table.Cell>
+          <Table.Cell>bar</Table.Cell>
+        </Table.Row>
+      </Table.Body>
+    </Table>
   </SortableTable>
 );
 ```
