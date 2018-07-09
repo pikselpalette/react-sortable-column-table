@@ -70,33 +70,6 @@ describe('SortableTable', () => {
     document.body.innerHTML = '';
   });
 
-  describe('SortingIcon', () => {
-    it('renders a span with <> as default', () => {
-      expect(mount((
-        <SortableTable.SortingIcon />
-      )).find('span')).toHaveText('<>');
-    });
-
-    it('renders children if passed children', () => {
-      expect(mount((
-        <SortableTable.SortingIcon>
-          <b>Icon</b>
-        </SortableTable.SortingIcon>
-      )).find('b')).toHaveText('Icon');
-    });
-
-    it('works fine with 2 children', () => {
-      expect(() => {
-        mount((
-          <SortableTable.SortingIcon>
-            <b>Icon</b>
-            <i>Icon</i>
-          </SortableTable.SortingIcon>
-        ));
-      }).not.toThrow();
-    });
-  });
-
   describe('instance', () => {
     beforeEach(setupComponent);
 
