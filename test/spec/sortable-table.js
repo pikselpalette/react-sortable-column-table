@@ -69,7 +69,7 @@ describe('SortableTable', () => {
     document.body.innerHTML = '';
   });
 
-  it('works fine with a null child', () => {
+  it('renders correctly with a null child', () => {
     expect(() => {
       mount((
         <SortableTable>
@@ -80,7 +80,7 @@ describe('SortableTable', () => {
     }).not.toThrow();
   });
 
-  it('works fine with a untyped row child', () => {
+  it('renders correctly with an untyped row child', () => {
     expect(() => {
       mount((
         <SortableTable>
