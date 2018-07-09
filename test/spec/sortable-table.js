@@ -85,7 +85,7 @@ describe('SortableTable', () => {
       )).find('b')).toHaveText('Icon');
     });
 
-    it('errors if passing 2 children', () => {
+    it('works fine with 2 children', () => {
       expect(() => {
         mount((
           <SortableTable.SortingIcon>
@@ -93,7 +93,7 @@ describe('SortableTable', () => {
             <i>Icon</i>
           </SortableTable.SortingIcon>
         ));
-      }).toThrow();
+      }).not.toThrow();
     });
   });
 
