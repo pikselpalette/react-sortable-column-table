@@ -17,32 +17,32 @@ describe('SortableTable', () => {
   let mockProps;
 
   const getChildren = () => (
-    <SortableTable.Table>
-      <SortableTable.Header>
-        <SortableTable.Row>
-          <SortableTable.HeaderCell>Dave {sortingIcon()}</SortableTable.HeaderCell>
+    <table>
+      <thead>
+        <tr>
+          <th>Dave {sortingIcon()}</th>
           <PassThroughComponent>
-            <SortableTable.HeaderCell>Jamie {sortingIcon()}</SortableTable.HeaderCell>
+            <th>Jamie {sortingIcon()}</th>
           </PassThroughComponent>
-          <SortableTable.HeaderCell>Joe {sortingIcon()}</SortableTable.HeaderCell>
-          <SortableTable.HeaderCell>No sorting</SortableTable.HeaderCell>
-        </SortableTable.Row>
-      </SortableTable.Header>
-      <SortableTable.Body>
-        <SortableTable.Row>
-          <SortableTable.Cell style={{ fontWeight: 'bold' }}>foo</SortableTable.Cell>
-          <SortableTable.Cell>bar</SortableTable.Cell>
-          <SortableTable.Cell><TestComponent>Bam</TestComponent></SortableTable.Cell>
-          <SortableTable.Cell>Action</SortableTable.Cell>
-        </SortableTable.Row>
-        <SortableTable.Row>
-          <SortableTable.Cell>whizz {sortingIcon()}</SortableTable.Cell>
-          <SortableTable.Cell>woop {sortingIcon()}</SortableTable.Cell>
-          <SortableTable.Cell>binary star system {sortingIcon()}</SortableTable.Cell>
-          <SortableTable.Cell>Action</SortableTable.Cell>
-        </SortableTable.Row>
-      </SortableTable.Body>
-    </SortableTable.Table>
+          <th>Joe {sortingIcon()}</th>
+          <th>No sorting</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style={{ fontWeight: 'bold' }}>foo</td>
+          <td>bar</td>
+          <td><TestComponent>Bam</TestComponent></td>
+          <td>Action</td>
+        </tr>
+        <tr>
+          <td>whizz {sortingIcon()}</td>
+          <td>woop {sortingIcon()}</td>
+          <td>binary star system {sortingIcon()}</td>
+          <td>Action</td>
+        </tr>
+      </tbody>
+    </table>
   );
 
   const getRequiredProps = () => ({
@@ -121,16 +121,16 @@ describe('SortableTable', () => {
         beforeEach(() => {
           component.setProps({
             children: (
-              <SortableTable.Table>
-                <SortableTable.Header>
-                  <SortableTable.Row>
-                    <SortableTable.HeaderCell>Dave</SortableTable.HeaderCell>
-                    <SortableTable.HeaderCell>Jamie {sortingIcon()}</SortableTable.HeaderCell>
-                    <SortableTable.HeaderCell>Joe {sortingIcon()}</SortableTable.HeaderCell>
-                    <SortableTable.HeaderCell>No sorting {sortingIcon()}</SortableTable.HeaderCell>
-                  </SortableTable.Row>
-                </SortableTable.Header>
-              </SortableTable.Table>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Dave</th>
+                    <th>Jamie {sortingIcon()}</th>
+                    <th>Joe {sortingIcon()}</th>
+                    <th>No sorting {sortingIcon()}</th>
+                  </tr>
+                </thead>
+              </table>
             )
           });
 
@@ -566,7 +566,7 @@ describe('SortableTable', () => {
       });
 
       it('renders a column ordering icon where SortingIcon is used', () => {
-        const headers = header().find(SortableTable.HeaderCell);
+        const headers = header().find('th');
 
         expect(headers).toHaveLength(4);
 
