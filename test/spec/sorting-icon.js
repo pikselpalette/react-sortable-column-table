@@ -32,4 +32,15 @@ describe('SortingIcon', () => {
       ));
     }).not.toThrow();
   });
+
+  it('works fine with a null child', () => {
+    expect(() => {
+      mount((
+        <SortingIcon>
+          {null}
+          <i>Icon</i>
+        </SortingIcon>
+      ));
+    }).not.toThrow();
+  });
 });
