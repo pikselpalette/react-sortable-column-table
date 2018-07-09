@@ -69,6 +69,29 @@ describe('SortableTable', () => {
     document.body.innerHTML = '';
   });
 
+  it('works fine with a null child', () => {
+    expect(() => {
+      mount((
+        <SortableTable>
+          {null}
+          <i>Icon</i>
+        </SortableTable>
+      ));
+    }).not.toThrow();
+  });
+
+  it('works fine with a untyped row child', () => {
+    expect(() => {
+      mount((
+        <SortableTable>
+          <tr>
+            Test
+          </tr>
+        </SortableTable>
+      ));
+    }).not.toThrow();
+  });
+
   describe('instance', () => {
     beforeEach(setupComponent);
 
