@@ -406,6 +406,17 @@ describe('SortableTable', () => {
                 it('sets isDragging to false', () => {
                   expect(instance.isDragging).toBe(false);
                 });
+
+                describe('when dragging ends', () => {
+                  beforeEach(() => {
+                    jest.spyOn(instance, 'setState');
+                    table().simulate('dragend');
+                  });
+
+                  it('does not call setState again', () => {
+                    expect(instance.setState).not.toHaveBeenCalled();
+                  });
+                });
               });
 
               describe('when dropping on an element within', () => {
