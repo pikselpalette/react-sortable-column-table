@@ -3,46 +3,45 @@ import React from 'react';
 import Enzyme, { mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import 'jest-enzyme';
-import SortableTable from '../../lib/sortable-table';
+import SortableTable, { SortingIcon } from '../../lib/sortable-table';
 
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('SortableTable', () => {
   const TestComponent = ({ children }) => (<b>{children}</b>);
   const PassThroughComponent = ({ children }) => children;
-  const sortingIcon = () => (<SortableTable.SortingIcon />);
 
   let component;
   let instance;
   let mockProps;
 
   const getChildren = () => (
-    <SortableTable.Table>
-      <SortableTable.Header>
-        <SortableTable.Row>
-          <SortableTable.HeaderCell>Dave {sortingIcon()}</SortableTable.HeaderCell>
+    <table>
+      <thead>
+        <tr>
+          <th>Dave <SortingIcon /></th>
           <PassThroughComponent>
-            <SortableTable.HeaderCell>Jamie {sortingIcon()}</SortableTable.HeaderCell>
+            <th>Jamie <SortingIcon /></th>
           </PassThroughComponent>
-          <SortableTable.HeaderCell>Joe {sortingIcon()}</SortableTable.HeaderCell>
-          <SortableTable.HeaderCell>No sorting</SortableTable.HeaderCell>
-        </SortableTable.Row>
-      </SortableTable.Header>
-      <SortableTable.Body>
-        <SortableTable.Row>
-          <SortableTable.Cell style={{ fontWeight: 'bold' }}>foo</SortableTable.Cell>
-          <SortableTable.Cell>bar</SortableTable.Cell>
-          <SortableTable.Cell><TestComponent>Bam</TestComponent></SortableTable.Cell>
-          <SortableTable.Cell>Action</SortableTable.Cell>
-        </SortableTable.Row>
-        <SortableTable.Row>
-          <SortableTable.Cell>whizz {sortingIcon()}</SortableTable.Cell>
-          <SortableTable.Cell>woop {sortingIcon()}</SortableTable.Cell>
-          <SortableTable.Cell>binary star system {sortingIcon()}</SortableTable.Cell>
-          <SortableTable.Cell>Action</SortableTable.Cell>
-        </SortableTable.Row>
-      </SortableTable.Body>
-    </SortableTable.Table>
+          <th>Joe <SortingIcon /></th>
+          <th>No sorting</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style={{ fontWeight: 'bold' }}>foo</td>
+          <td>bar</td>
+          <td><TestComponent>Bam</TestComponent></td>
+          <td>Action</td>
+        </tr>
+        <tr>
+          <td>whizz <SortingIcon /></td>
+          <td>woop <SortingIcon /></td>
+          <td>binary star system <SortingIcon /></td>
+          <td>Action</td>
+        </tr>
+      </tbody>
+    </table>
   );
 
   const getRequiredProps = () => ({
@@ -70,31 +69,27 @@ describe('SortableTable', () => {
     document.body.innerHTML = '';
   });
 
-  describe('SortingIcon', () => {
-    it('renders a span with <> as default', () => {
-      expect(mount((
-        <SortableTable.SortingIcon />
-      )).find('span')).toHaveText('<>');
-    });
+  it('renders correctly with a null child', () => {
+    expect(() => {
+      mount((
+        <SortableTable>
+          {null}
+          <i>Icon</i>
+        </SortableTable>
+      ));
+    }).not.toThrow();
+  });
 
-    it('renders children if passed children', () => {
-      expect(mount((
-        <SortableTable.SortingIcon>
-          <b>Icon</b>
-        </SortableTable.SortingIcon>
-      )).find('b')).toHaveText('Icon');
-    });
-
-    it('errors if passing 2 children', () => {
-      expect(() => {
-        mount((
-          <SortableTable.SortingIcon>
-            <b>Icon</b>
-            <i>Icon</i>
-          </SortableTable.SortingIcon>
-        ));
-      }).toThrow();
-    });
+  it('renders correctly with an untyped row child', () => {
+    expect(() => {
+      mount((
+        <SortableTable>
+          <tr>
+            Test
+          </tr>
+        </SortableTable>
+      ));
+    }).not.toThrow();
   });
 
   describe('instance', () => {
@@ -148,16 +143,16 @@ describe('SortableTable', () => {
         beforeEach(() => {
           component.setProps({
             children: (
-              <SortableTable.Table>
-                <SortableTable.Header>
-                  <SortableTable.Row>
-                    <SortableTable.HeaderCell>Dave</SortableTable.HeaderCell>
-                    <SortableTable.HeaderCell>Jamie {sortingIcon()}</SortableTable.HeaderCell>
-                    <SortableTable.HeaderCell>Joe {sortingIcon()}</SortableTable.HeaderCell>
-                    <SortableTable.HeaderCell>No sorting {sortingIcon()}</SortableTable.HeaderCell>
-                  </SortableTable.Row>
-                </SortableTable.Header>
-              </SortableTable.Table>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Dave</th>
+                    <th>Jamie <SortingIcon /></th>
+                    <th>Joe <SortingIcon /></th>
+                    <th>No sorting <SortingIcon /></th>
+                  </tr>
+                </thead>
+              </table>
             )
           });
 
@@ -190,7 +185,7 @@ describe('SortableTable', () => {
               const icon = header()
                 .find('th')
                 .at(1)
-                .find(SortableTable.SortingIcon);
+                .find(SortingIcon);
 
               icon.simulate('dragstart', getDragEvent());
 
@@ -202,7 +197,7 @@ describe('SortableTable', () => {
             const icon = header()
               .find('th')
               .at(0)
-              .find(SortableTable.SortingIcon);
+              .find(SortingIcon);
 
             icon.simulate('dragstart', getDragEvent());
 
@@ -224,7 +219,7 @@ describe('SortableTable', () => {
 
               jest.useFakeTimers();
               dragEvent = getDragEvent();
-              dragColumnCell = header().find('th').find(SortableTable.SortingIcon).at(2);
+              dragColumnCell = header().find('th').find(SortingIcon).at(2);
               dragColumnCell.simulate('dragstart', dragEvent);
             });
 
@@ -411,11 +406,22 @@ describe('SortableTable', () => {
                 it('sets isDragging to false', () => {
                   expect(instance.isDragging).toBe(false);
                 });
+
+                describe('when dragging ends', () => {
+                  beforeEach(() => {
+                    jest.spyOn(instance, 'setState');
+                    table().simulate('dragend');
+                  });
+
+                  it('does not call setState again', () => {
+                    expect(instance.setState).not.toHaveBeenCalled();
+                  });
+                });
               });
 
               describe('when dropping on an element within', () => {
                 beforeEach(() => {
-                  columnCell.find(SortableTable.SortingIcon).simulate('drop');
+                  columnCell.find(SortingIcon).simulate('drop');
                 });
 
                 it('calls the onColumnOrder callback', () => {
@@ -593,12 +599,12 @@ describe('SortableTable', () => {
       });
 
       it('renders a column ordering icon where SortingIcon is used', () => {
-        const headers = header().find(SortableTable.HeaderCell);
+        const headers = header().find('th');
 
         expect(headers).toHaveLength(4);
 
         for (let i = 0; i < headers.length; i++) {
-          const icon = headers.at(i).find(SortableTable.SortingIcon);
+          const icon = headers.at(i).find(SortingIcon);
 
           if (i === 3) {
             expect(icon).toHaveLength(0);
@@ -609,7 +615,7 @@ describe('SortableTable', () => {
       });
 
       it('renders SortingIcon with the correct props', () => {
-        const icon = component.find(SortableTable.SortingIcon).first();
+        const icon = component.find(SortingIcon).first();
 
         expect(icon).toHaveProp('draggable', true);
         expect(icon).toHaveProp('style', { cursor: 'grab' });

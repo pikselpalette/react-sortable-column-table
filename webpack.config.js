@@ -20,6 +20,7 @@ module.exports = {
     filename: 'index.js',
     libraryTarget: 'umd'
   },
+  externals: ['react', 'react-dom'],
   module: {
     rules: [
       {

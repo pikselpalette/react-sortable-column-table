@@ -22,8 +22,8 @@ module.exports = (config) => {
     maxConcurrentTestRunners: 6,
     thresholds: {
       high: 100,
-      low: 96,
-      break: 96
+      low: 100,
+      break: 100
     }
   });
 };
