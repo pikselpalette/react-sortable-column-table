@@ -1,7 +1,7 @@
 {
   "name": "react-sortable-column-table",
   "description": "A table with columns that can be reordered by dragging an icon in one of the cells",
-  "version": "0.1.3",
+  "version": "1.0.0",
   "author": "Sam Boylett <sam.boylett@piksel.com>",
   "main": "dist/index.js",
   "scripts": {
