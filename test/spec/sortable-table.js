@@ -10,7 +10,6 @@ Enzyme.configure({ adapter: new Adapter() });
 describe('SortableTable', () => {
   const TestComponent = ({ children }) => (<b>{children}</b>);
   const PassThroughComponent = ({ children }) => children;
-  const sortingIcon = () => (<SortingIcon />);
 
   let component;
   let instance;
@@ -20,11 +19,11 @@ describe('SortableTable', () => {
     <table>
       <thead>
         <tr>
-          <th>Dave {sortingIcon()}</th>
+          <th>Dave <SortingIcon /></th>
           <PassThroughComponent>
-            <th>Jamie {sortingIcon()}</th>
+            <th>Jamie <SortingIcon /></th>
           </PassThroughComponent>
-          <th>Joe {sortingIcon()}</th>
+          <th>Joe <SortingIcon /></th>
           <th>No sorting</th>
         </tr>
       </thead>
@@ -36,9 +35,9 @@ describe('SortableTable', () => {
           <td>Action</td>
         </tr>
         <tr>
-          <td>whizz {sortingIcon()}</td>
-          <td>woop {sortingIcon()}</td>
-          <td>binary star system {sortingIcon()}</td>
+          <td>whizz <SortingIcon /></td>
+          <td>woop <SortingIcon /></td>
+          <td>binary star system <SortingIcon /></td>
           <td>Action</td>
         </tr>
       </tbody>
@@ -125,9 +124,9 @@ describe('SortableTable', () => {
                 <thead>
                   <tr>
                     <th>Dave</th>
-                    <th>Jamie {sortingIcon()}</th>
-                    <th>Joe {sortingIcon()}</th>
-                    <th>No sorting {sortingIcon()}</th>
+                    <th>Jamie <SortingIcon /></th>
+                    <th>Joe <SortingIcon /></th>
+                    <th>No sorting <SortingIcon /></th>
                   </tr>
                 </thead>
               </table>
