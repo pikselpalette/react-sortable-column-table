@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+## 1.0.0
+
+* Allow `SortingIcon` to take any amount of children
+* Remove dependency on react-render-as
+* Remove pseudo elements in favour of `tr`, `th`, and `td` props
+* Changed how components are exported
+* Changed coverage threshold to 100%
+* Changed mutation threshold to 100%
+
 ## 0.1.3
 
 * Don't use buggy React.Children.only
