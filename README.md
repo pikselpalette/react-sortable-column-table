@@ -7,6 +7,7 @@
 [![dependencies Status](https://david-dm.org/pikselpalette/react-sortable-column-table/status.svg)](https://david-dm.org/pikselpalette/react-sortable-column-table)
 [![devDependencies Status](https://david-dm.org/pikselpalette/react-sortable-column-table/dev-status.svg)](https://david-dm.org/pikselpalette/react-sortable-column-table?type=dev)
 [![peerDependencies Status](https://david-dm.org/pikselpalette/react-sortable-column-table/peer-status.svg)](https://david-dm.org/pikselpalette/react-sortable-column-table?type=peer)
+[![codecov](https://codecov.io/gh/pikselpalette/react-sortable-column-table/branch/master/graph/badge.svg)](https://codecov.io/gh/pikselpalette/react-sortable-column-table)
 
 A table with columns that can be reordered by dragging an icon in one of the cells
 
