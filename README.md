@@ -68,7 +68,7 @@ const table = (
           <Table.HeaderCell>Foo {semanticSortingIcon}</Table.HeaderCell>
           <Table.HeaderCell>Bar {semanticSortingIcon}</Table.HeaderCell>
         </Table.Row>
-      </thead>
+      </Table.Header>
       <Table.Body>
         <Table.Row>
           <Table.Cell>foo</Table.Cell>
