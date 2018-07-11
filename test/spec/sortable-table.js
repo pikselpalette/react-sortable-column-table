@@ -69,6 +69,113 @@ describe('SortableTable', () => {
     document.body.innerHTML = '';
   });
 
+  describe('when it has a child which should not remount', () => {
+    let mountCount;
+    let updateCount;
+
+    class TestComponentRemount extends React.Component {
+      componentDidMount() { // eslint-disable-line class-methods-use-this
+        mountCount++;
+      }
+
+      componentDidUpdate() { // eslint-disable-line class-methods-use-this
+        updateCount++;
+      }
+
+      render() { // eslint-disable-line class-methods-use-this
+        return null;
+      }
+    }
+
+    beforeEach(() => {
+      mountCount = 0;
+      updateCount = 0;
+
+      setupComponent({
+        children: (
+          <table>
+            <thead>
+              <tr>
+                <th>
+                  <TestComponentRemount />
+                </th>
+              </tr>
+            </thead>
+          </table>
+        )
+      });
+    });
+
+    it('mounts a single time', () => {
+      expect(mountCount).toEqual(1);
+    });
+
+    it('has not updated', () => {
+      expect(updateCount).toEqual(0);
+    });
+
+    describe('when component re-renders', () => {
+      beforeEach(() => {
+        component.setProps({
+          children: (
+            <table>
+              <thead>
+                <tr>
+                  <th>
+                    <TestComponentRemount />
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+          )
+        });
+        component.update();
+      });
+
+      it('has not remounted', () => {
+        expect(mountCount).toEqual(1);
+      });
+
+      it('has updated', () => {
+        expect(updateCount).toEqual(1);
+      });
+
+      describe('when component re-renders again', () => {
+        beforeEach(() => {
+          component.setProps({
+            children: (
+              <table>
+                <thead>
+                  <tr>
+                    <th>
+                      <TestComponentRemount />
+                    </th>
+                    <th>
+                      Test
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+            )
+          });
+          component.update();
+        });
+
+        it('has not remounted', () => {
+          expect(mountCount).toEqual(1);
+        });
+
+        it('has updated', () => {
+          expect(updateCount).toEqual(2);
+        });
+      });
+    });
+  });
+
   it('renders correctly with a null child', () => {
     expect(() => {
       mount((
