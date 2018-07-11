@@ -113,6 +113,35 @@ describe('SortableTable', () => {
     it('has not updated', () => {
       expect(updateCount).toEqual(0);
     });
+
+    describe('when component re-renders', () => {
+      beforeEach(() => {
+        component.setProps({
+          children: (
+            <table>
+              <thead>
+                <tr>
+                  <th>
+                    <TestComponentRemount />
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+          )
+        });
+        component.update();
+      });
+
+      it('has not remounted', () => {
+        expect(mountCount).toEqual(1);
+      });
+
+      it('has updated', () => {
+        expect(updateCount).toEqual(1);
+      });
+    });
   });
 
   it('renders correctly with a null child', () => {
