@@ -69,6 +69,52 @@ describe('SortableTable', () => {
     document.body.innerHTML = '';
   });
 
+  describe('when it has a child which should not remount', () => {
+    let mountCount;
+    let updateCount;
+
+    class TestComponentRemount extends React.Component {
+      componentDidMount() {
+        mountCount++;
+      }
+
+      componentDidUpdate() {
+        updateCount++;
+      }
+
+      render() {
+        return null;
+      }
+    }
+
+    beforeEach(() => {
+      mountCount = 0;
+      updateCount = 0;
+
+      setupComponent({
+        children: (
+          <table>
+            <thead>
+              <tr>
+                <th>
+                  <TestComponentRemount />
+                </th>
+              </tr>
+            </thead>
+          </table>
+        )
+      });
+    });
+
+    it('mounts a single time', () => {
+      expect(mountCount).toEqual(1);
+    });
+
+    it('has not updated', () => {
+      expect(updateCount).toEqual(0);
+    });
+  });
+
   it('renders correctly with a null child', () => {
     expect(() => {
       mount((
