@@ -74,15 +74,15 @@ describe('SortableTable', () => {
     let updateCount;
 
     class TestComponentRemount extends React.Component {
-      componentDidMount() {
+      componentDidMount() { // eslint-disable-line class-methods-use-this
         mountCount++;
       }
 
-      componentDidUpdate() {
+      componentDidUpdate() { // eslint-disable-line class-methods-use-this
         updateCount++;
       }
 
-      render() {
+      render() { // eslint-disable-line class-methods-use-this
         return null;
       }
     }
