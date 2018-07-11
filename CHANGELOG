@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## 1.0.1
+
+* Use React.Children.map in most places to prevent pointless remounting of child components
+
 ## 1.0.0
 
 * Allow `SortingIcon` to take any amount of children
